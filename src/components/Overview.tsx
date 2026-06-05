@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Member, Cluster, Meeting, VillageActivity } from '../types';
+import { getThaiMonthShort, getBuddhistEraYearShort, parseThaiDateString } from '../utils/dateUtils';
 
 interface OverviewProps {
   clusters: Cluster[];
@@ -175,7 +176,7 @@ export default function Overview({
                 </div>
                 <h3 className="text-base font-black font-headline text-[#131b2e]">กิจกรรมกำลังจะมาถึง</h3>
               </div>
-              <span className="text-[10px] bg-teal-55 px-2.5 py-1 rounded-full text-[#0f766e] bg-teal-50 font-black">มิ.ย. 68</span>
+              <span className="text-[10px] bg-teal-55 px-2.5 py-1 rounded-full text-[#0f766e] bg-teal-50 font-black">{getThaiMonthShort()} {getBuddhistEraYearShort()}</span>
             </div>
 
             <div className="space-y-4">
@@ -188,32 +189,36 @@ export default function Overview({
                 </div>
               ) : (
                 <>
-                  {upcomingMeetings.map((meet) => (
-                    <div 
-                      key={meet.id}
-                      onClick={() => onNavigateToTab('meetings')}
-                      className="group flex items-center gap-4 p-4 bg-teal-500/5 rounded-2xl border border-teal-500/15 hover:border-[#0f766e] transition-all cursor-pointer"
-                    >
-                      <div className="text-center w-12 border-r border-[#0f766e]/30 pr-3 shrink-0">
-                        <p className="text-xl font-black font-headline text-[#0f766e]">15</p>
-                        <p className="text-[9px] font-black text-[#0f766e] uppercase tracking-wider">มิ.ย.</p>
+                  {upcomingMeetings.map((meet) => {
+                    const { day, monthShort } = parseThaiDateString(meet.dateStr);
+                    return (
+                      <div 
+                        key={meet.id}
+                        onClick={() => onNavigateToTab('meetings')}
+                        className="group flex items-center gap-4 p-4 bg-teal-500/5 rounded-2xl border border-teal-500/15 hover:border-[#0f766e] transition-all cursor-pointer"
+                      >
+                        <div className="text-center w-12 border-r border-[#0f766e]/30 pr-3 shrink-0">
+                          <p className="text-xl font-black font-headline text-[#0f766e]">{day}</p>
+                          <p className="text-[9px] font-black text-[#0f766e] uppercase tracking-wider">{monthShort}</p>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-xs font-black text-[#131b2e] truncate group-hover:text-[#0f766e] transition-colors">
+                            {meet.title}
+                          </h4>
+                          <p className="text-[11px] font-semibold text-[#7a7489] truncate">09:00 น. - {meet.location}</p>
+                        </div>
+                        <span className="shrink-0 bg-[#0f766e] text-white text-[9px] font-black px-2 py-1 rounded shadow-sm">
+                          +{meet.pointsReward} แต้ม
+                        </span>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-xs font-black text-[#131b2e] truncate group-hover:text-[#0f766e] transition-colors">
-                          {meet.title}
-                        </h4>
-                        <p className="text-[11px] font-semibold text-[#7a7489] truncate">09:00 น. - {meet.location}</p>
-                      </div>
-                      <span className="shrink-0 bg-[#0f766e] text-white text-[9px] font-black px-2 py-1 rounded shadow-sm">
-                        +{meet.pointsReward} แต้ม
-                      </span>
-                    </div>
-                  ))}
+                    );
+                  })}
 
                   {upcomingActivities.slice(0, 2).map((act, idx) => {
                     const colors = idx === 0 
-                      ? { bg: 'bg-[#00e475]/5', border: 'border-[#00e475]/20', hover: 'hover:border-[#00e475]', text: 'text-[#004b22]', count: '22' }
-                      : { bg: 'bg-[#cd4800]/5', border: 'border-[#cd4800]/20', hover: 'hover:border-[#cd4800]', text: 'text-[#cd4800]', count: '30' };
+                      ? { bg: 'bg-[#00e475]/5', border: 'border-[#00e475]/20', hover: 'hover:border-[#00e475]', text: 'text-[#004b22]' }
+                      : { bg: 'bg-[#cd4800]/5', border: 'border-[#cd4800]/20', hover: 'hover:border-[#cd4800]', text: 'text-[#cd4800]' };
+                    const { day, monthShort } = parseThaiDateString(act.dateStr);
                     return (
                       <div 
                         key={act.id}
@@ -221,8 +226,8 @@ export default function Overview({
                         className={`group flex items-center gap-4 p-4 ${colors.bg} rounded-2xl border ${colors.border} ${colors.hover} transition-all cursor-pointer`}
                       >
                         <div className={`text-center w-12 border-r ${idx === 0 ? 'border-[#00e475]' : 'border-[#cd4800]'}/30 pr-3 shrink-0`}>
-                          <p className={`text-xl font-black font-headline ${colors.text}`}>{colors.count}</p>
-                          <p className={`text-[9px] font-black ${colors.text} uppercase tracking-wider`}>มิ.ย.</p>
+                          <p className={`text-xl font-black font-headline ${colors.text}`}>{day}</p>
+                          <p className={`text-[9px] font-black ${colors.text} uppercase tracking-wider`}>{monthShort}</p>
                         </div>
                         <div className="flex-1 min-w-0">
                           <h4 className="text-xs font-black text-[#131b2e] truncate transition-colors">
@@ -239,6 +244,7 @@ export default function Overview({
                 </>
               )}
             </div>
+
           </section>
 
           {/* Top 5 Leaderboard */}

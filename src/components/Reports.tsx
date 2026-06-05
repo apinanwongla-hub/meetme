@@ -1,5 +1,6 @@
 import React from 'react';
 import { Cluster, Member, Meeting } from '../types';
+import { getBuddhistEraYear, getLastFourMonthsThai } from '../utils/dateUtils';
 
 interface ReportsProps {
   clusters: Cluster[];
@@ -98,7 +99,7 @@ export default function Reports({ clusters, members, meetings }: ReportsProps) {
             <div className="mb-6 flex justify-between items-center">
               <div>
                 <h3 className="text-lg font-black font-headline text-[#131b2e]">อัตราการร่วมประชุมแยกรายคุ้ม (%)</h3>
-                <p className="text-xs text-[#7a7489] font-bold">กราฟวัดสัดส่วนการเข้าลงชื่อตามวารสารปี 2568</p>
+                <p className="text-xs text-[#7a7489] font-bold">กราฟวัดสัดส่วนการเข้าลงชื่อตามวารสารปี {getBuddhistEraYear()}</p>
               </div>
               <span className="text-xs font-black bg-teal-50 border px-3 py-1 text-[#0f766e] rounded-lg">
                 เป้าชุมชน: 70%
@@ -196,28 +197,33 @@ export default function Reports({ clusters, members, meetings }: ReportsProps) {
       {/* MONTHLY RECORD TREND TABLES */}
       <section className="bg-white border border-[#cac3da]/50 rounded-[2rem] overflow-hidden shadow-lg p-6">
         <h3 className="text-base font-black font-headline text-[#131b2e] mb-4">แนวโน้มการมีส่วนร่วมรายปี</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div className="border border-slate-100 p-4 rounded-2xl bg-slate-50 text-center">
-            <span className="text-[10px] font-black text-[#7a7489] uppercase">มีนาคม 2568</span>
-            <p className="text-xl font-black text-[#131b2e]">56%</p>
-            <span className="text-[9px] font-bold text-[#ba1a1a]">ต่ำกว่าค่าเฉลี่ย</span>
-          </div>
-          <div className="border border-slate-100 p-4 rounded-2xl bg-slate-50 text-center">
-            <span className="text-[10px] font-black text-[#7a7489] uppercase">เมษายน 2568</span>
-            <p className="text-xl font-black text-[#131b2e]">66%</p>
-            <span className="text-[9px] font-bold text-[#006631]">สอดคล้องตามมาตรฐาน</span>
-          </div>
-          <div className="border border-slate-100 p-4 rounded-2xl bg-slate-50 text-center">
-            <span className="text-[10px] font-black text-[#7a7489] uppercase">พฤษภาคม 2568</span>
-            <p className="text-xl font-black text-[#131b2e]">61%</p>
-            <span className="text-[9px] font-bold text-amber-600">ทรงตัว</span>
-          </div>
-          <div className="border border-slate-100 p-4 rounded-2xl bg-teal-50 text-center">
-            <span className="text-[10px] font-black text-[#0f766e] uppercase">มิถุนายน 2568 (ล่าสุด)</span>
-            <p className="text-xl font-black text-[#0f766e]">64%</p>
-            <span className="text-[9px] font-bold text-[#006631]">สูงขึ้น 3% • ดี</span>
-          </div>
-        </div>
+        {(() => {
+          const lastFour = getLastFourMonthsThai();
+          return (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="border border-slate-100 p-4 rounded-2xl bg-slate-50 text-center">
+                <span className="text-[10px] font-black text-[#7a7489] uppercase">{lastFour[0]}</span>
+                <p className="text-xl font-black text-[#131b2e]">56%</p>
+                <span className="text-[9px] font-bold text-[#ba1a1a]">ต่ำกว่าค่าเฉลี่ย</span>
+              </div>
+              <div className="border border-slate-100 p-4 rounded-2xl bg-slate-50 text-center">
+                <span className="text-[10px] font-black text-[#7a7489] uppercase">{lastFour[1]}</span>
+                <p className="text-xl font-black text-[#131b2e]">66%</p>
+                <span className="text-[9px] font-bold text-[#006631]">สอดคล้องตามมาตรฐาน</span>
+              </div>
+              <div className="border border-slate-100 p-4 rounded-2xl bg-slate-50 text-center">
+                <span className="text-[10px] font-black text-[#7a7489] uppercase">{lastFour[2]}</span>
+                <p className="text-xl font-black text-[#131b2e]">61%</p>
+                <span className="text-[9px] font-bold text-amber-600">ทรงตัว</span>
+              </div>
+              <div className="border border-slate-100 p-4 rounded-2xl bg-teal-50 text-center">
+                <span className="text-[10px] font-black text-[#0f766e] uppercase">{lastFour[3]} (ล่าสุด)</span>
+                <p className="text-xl font-black text-[#0f766e]">64%</p>
+                <span className="text-[9px] font-bold text-[#006631]">สูงขึ้น 3% • ดี</span>
+              </div>
+            </div>
+          );
+        })()}
       </section>
     </div>
   );

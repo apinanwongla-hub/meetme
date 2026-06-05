@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Member, Cluster } from '../types';
+import { getThaiMonthName, getBuddhistEraYear } from '../utils/dateUtils';
 
 interface MembersProps {
   members: Member[];
@@ -135,7 +136,7 @@ export default function Members({
             <h2 className="text-3xl font-extrabold text-[#131b2e] tracking-tight font-headline">รายชื่อสมาชิก</h2>
             <span className="text-[11px] px-3 py-1 bg-[#006631] text-[#62ff96] font-bold rounded-full uppercase tracking-wider shadow-sm">Live</span>
           </div>
-          <p className="text-sm font-semibold text-[#7a7489]">มิถุนายน 2568 • ทะเบียนสมาชิกชุมชนบ้านฉลีก หมู่ที่ 5 ({members.length} คน)</p>
+          <p className="text-sm font-semibold text-[#7a7489]">{getThaiMonthName()} {getBuddhistEraYear()} • ทะเบียนสมาชิกชุมชนบ้านฉลีก หมู่ที่ 5 ({members.length} คน)</p>
         </div>
         <button
           onClick={handleOpenAdd}
@@ -239,7 +240,7 @@ export default function Members({
             </thead>
             <tbody className="divide-y divide-[#cac3da]/30">
               {paginatedMembers.length > 0 ? (
-                paginatedMembers.map((member) => {
+                paginatedMembers.map((member, index) => {
                   const matchingCluster = clusters.find((c) => c.id === member.clusterId);
                   const statusBadgeClass =
                     member.status === 'ปกติ'
@@ -250,7 +251,7 @@ export default function Members({
 
                   return (
                     <tr key={member.id} className="hover:bg-teal-50/20 transition-colors">
-                      <td className="px-6 py-5 text-sm font-bold text-[#7a7489]">{member.id}</td>
+                      <td className="px-6 py-5 text-sm font-bold text-[#7a7489]">{startIndex + index + 1}</td>
                       <td className="px-6 py-5">
                         <div className="flex items-center gap-3">
                           <div className="w-10 h-10 rounded-xl bg-[#0f766e]/10 text-[#0f766e] flex items-center justify-center text-xs font-black shadow-inner">
