@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Member, Cluster, Meeting, VillageActivity } from '../types';
+import { getThaiCurrentShortMonthYear, getCurrentThaiShortMonthName } from '../utils/date';
 
 interface OverviewProps {
   clusters: Cluster[];
@@ -175,7 +176,7 @@ export default function Overview({
                 </div>
                 <h3 className="text-base font-black font-headline text-[#131b2e]">กิจกรรมกำลังจะมาถึง</h3>
               </div>
-              <span className="text-[10px] bg-teal-55 px-2.5 py-1 rounded-full text-[#0f766e] bg-teal-50 font-black">มิ.ย. 68</span>
+              <span className="text-[10px] px-2.5 py-1 rounded-full text-[#0f766e] bg-teal-50 font-black">{getThaiCurrentShortMonthYear()}</span>
             </div>
 
             <div className="space-y-4">
@@ -196,7 +197,7 @@ export default function Overview({
                     >
                       <div className="text-center w-12 border-r border-[#0f766e]/30 pr-3 shrink-0">
                         <p className="text-xl font-black font-headline text-[#0f766e]">15</p>
-                        <p className="text-[9px] font-black text-[#0f766e] uppercase tracking-wider">มิ.ย.</p>
+                        <p className="text-[9px] font-black text-[#0f766e] uppercase tracking-wider">{getCurrentThaiShortMonthName()}</p>
                       </div>
                       <div className="flex-1 min-w-0">
                         <h4 className="text-xs font-black text-[#131b2e] truncate group-hover:text-[#0f766e] transition-colors">
@@ -222,7 +223,7 @@ export default function Overview({
                       >
                         <div className={`text-center w-12 border-r ${idx === 0 ? 'border-[#00e475]' : 'border-[#cd4800]'}/30 pr-3 shrink-0`}>
                           <p className={`text-xl font-black font-headline ${colors.text}`}>{colors.count}</p>
-                          <p className={`text-[9px] font-black ${colors.text} uppercase tracking-wider`}>มิ.ย.</p>
+                          <p className={`text-[9px] font-black ${colors.text} uppercase tracking-wider`}>{getCurrentThaiShortMonthName()}</p>
                         </div>
                         <div className="flex-1 min-w-0">
                           <h4 className="text-xs font-black text-[#131b2e] truncate transition-colors">

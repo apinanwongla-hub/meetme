@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { VillageActivity, Member, Cluster } from '../types';
+import { getCurrentThaiYear, getCurrentThaiMonthName, getCurrentThaiShortMonthName } from '../utils/date';
 
 interface ActivitiesProps {
   activities: VillageActivity[];
@@ -223,13 +224,13 @@ export default function Activities({
               </div>
 
               <div>
-                <label className="block text-xs font-black text-[#7a7489] uppercase mb-1">วันที่ดำเนินงาน (เช่น 26 มิ.ย. 2568)</label>
+                <label className="block text-xs font-black text-[#7a7489] uppercase mb-1">{`วันที่ดำเนินงาน (เช่น 26 ${getCurrentThaiShortMonthName()} ${getCurrentThaiYear()})`}</label>
                 <input
                   type="text"
                   required
                   value={formData.dateStr}
                   onChange={(e) => setFormData({ ...formData, dateStr: e.target.value })}
-                  placeholder="เช่น 24 มิถุนายน 2568"
+                  placeholder={`เช่น 24 ${getCurrentThaiMonthName()} ${getCurrentThaiYear()}`}
                   className="w-full px-4 py-2.5 rounded-xl border border-[#cac3da] text-sm focus:ring-2 focus:ring-[#0f766e] outline-none"
                 />
               </div>
