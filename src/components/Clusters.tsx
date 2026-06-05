@@ -94,39 +94,33 @@ export default function Clusters({ clusters, members }: ClustersProps) {
                   <span className="text-[10px] text-[#7a7489] font-black uppercase tracking-tighter">สมาชิก</span>
                 </div>
 
-                {/* Circular Percentage Donut or Badge */}
-                {cluster.id === 1 ? (
-                  <div className="relative flex items-center justify-center w-14 h-14 shrink-0">
-                    <svg className="w-full h-full transform -rotate-90">
-                      <circle
-                        className="text-teal-100"
-                        cx="28"
-                        cy="28"
-                        fill="transparent"
-                        r={normalizedRadius}
-                        stroke="currentColor"
-                        strokeWidth={stroke}
-                      />
-                      <circle
-                        className="text-[#0f766e]"
-                        cx="28"
-                        cy="28"
-                        fill="transparent"
-                        r={normalizedRadius}
-                        stroke="currentColor"
-                        strokeDasharray={circumference + ' ' + circumference}
-                        style={{ strokeDashoffset }}
-                        strokeLinecap="round"
-                        strokeWidth={stroke}
-                      />
-                    </svg>
-                    <span className="absolute text-xs font-black text-[#0f766e]">82%</span>
-                  </div>
-                ) : (
-                  <div className={`${config.pillColor} text-white px-4 py-1.5 rounded-full text-xs font-black shadow-md shadow-slate-200`}>
-                    {cluster.attendancePercentage}%
-                  </div>
-                )}
+                {/* Circular Percentage Donut */}
+                <div className="relative flex items-center justify-center w-14 h-14 shrink-0">
+                  <svg className="w-full h-full transform -rotate-90">
+                    <circle
+                      className="text-teal-100"
+                      cx="28"
+                      cy="28"
+                      fill="transparent"
+                      r={normalizedRadius}
+                      stroke="currentColor"
+                      strokeWidth={stroke}
+                    />
+                    <circle
+                      className="text-[#0f766e]"
+                      cx="28"
+                      cy="28"
+                      fill="transparent"
+                      r={normalizedRadius}
+                      stroke="currentColor"
+                      strokeDasharray={circumference + ' ' + circumference}
+                      style={{ strokeDashoffset }}
+                      strokeLinecap="round"
+                      strokeWidth={stroke}
+                    />
+                  </svg>
+                  <span className="absolute text-xs font-black text-[#0f766e]">{cluster.attendancePercentage}%</span>
+                </div>
               </div>
             </div>
           );
