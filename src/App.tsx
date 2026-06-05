@@ -56,6 +56,16 @@ export default function App() {
 
   // Sync state with LocalStorage on init
   useEffect(() => {
+    // Force reset to remove old mock-filled database for active production use
+    const isMockClearedCombined = localStorage.getItem('baan_suan_dee_prod_v2');
+    if (!isMockClearedCombined) {
+      localStorage.removeItem('baan_suan_dee_clusters');
+      localStorage.removeItem('baan_suan_dee_members');
+      localStorage.removeItem('baan_suan_dee_meetings');
+      localStorage.removeItem('baan_suan_dee_activities');
+      localStorage.setItem('baan_suan_dee_prod_v2', 'true');
+    }
+
     const storedClusters = localStorage.getItem('baan_suan_dee_clusters');
     const storedMembers = localStorage.getItem('baan_suan_dee_members');
     const storedMeetings = localStorage.getItem('baan_suan_dee_meetings');

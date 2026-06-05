@@ -180,54 +180,64 @@ export default function Overview({
 
             <div className="space-y-4">
               {/* Combine upcoming meetings and activities */}
-              {upcomingMeetings.map((meet) => (
-                <div 
-                  key={meet.id}
-                  onClick={() => onNavigateToTab('meetings')}
-                  className="group flex items-center gap-4 p-4 bg-teal-500/5 rounded-2xl border border-teal-500/15 hover:border-[#0f766e] transition-all cursor-pointer"
-                >
-                  <div className="text-center w-12 border-r border-[#0f766e]/30 pr-3 shrink-0">
-                    <p className="text-xl font-black font-headline text-[#0f766e]">15</p>
-                    <p className="text-[9px] font-black text-[#0f766e] uppercase tracking-wider">มิ.ย.</p>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-xs font-black text-[#131b2e] truncate group-hover:text-[#0f766e] transition-colors">
-                      {meet.title}
-                    </h4>
-                    <p className="text-[11px] font-semibold text-[#7a7489] truncate">09:00 น. - {meet.location}</p>
-                  </div>
-                  <span className="shrink-0 bg-[#0f766e] text-white text-[9px] font-black px-2 py-1 rounded shadow-sm">
-                    +{meet.pointsReward} แต้ม
-                  </span>
+              {upcomingMeetings.length === 0 && upcomingActivities.length === 0 ? (
+                <div className="py-8 text-center bg-slate-50 rounded-2xl border border-dashed border-[#cac3da]/30">
+                  <span className="material-symbols-outlined text-3xl text-[#7a7489]/50 animate-pulse">calendar_today</span>
+                  <p className="text-xs font-black text-[#7a7489] mt-2">ไม่มีการประชุมหรือกิจกรรมเร็ว ๆ นี้</p>
+                  <p className="text-[10px] text-[#7a7489]/80 mt-1">เริ่มต้นสร้างใหม่ในแท็บ "เช็คชื่อเข้าประชุม" หรือ "กิจกรรมชุมชน"</p>
                 </div>
-              ))}
+              ) : (
+                <>
+                  {upcomingMeetings.map((meet) => (
+                    <div 
+                      key={meet.id}
+                      onClick={() => onNavigateToTab('meetings')}
+                      className="group flex items-center gap-4 p-4 bg-teal-500/5 rounded-2xl border border-teal-500/15 hover:border-[#0f766e] transition-all cursor-pointer"
+                    >
+                      <div className="text-center w-12 border-r border-[#0f766e]/30 pr-3 shrink-0">
+                        <p className="text-xl font-black font-headline text-[#0f766e]">15</p>
+                        <p className="text-[9px] font-black text-[#0f766e] uppercase tracking-wider">มิ.ย.</p>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-xs font-black text-[#131b2e] truncate group-hover:text-[#0f766e] transition-colors">
+                          {meet.title}
+                        </h4>
+                        <p className="text-[11px] font-semibold text-[#7a7489] truncate">09:00 น. - {meet.location}</p>
+                      </div>
+                      <span className="shrink-0 bg-[#0f766e] text-white text-[9px] font-black px-2 py-1 rounded shadow-sm">
+                        +{meet.pointsReward} แต้ม
+                      </span>
+                    </div>
+                  ))}
 
-              {upcomingActivities.slice(0, 2).map((act, idx) => {
-                const colors = idx === 0 
-                  ? { bg: 'bg-[#00e475]/5', border: 'border-[#00e475]/20', hover: 'hover:border-[#00e475]', text: 'text-[#004b22]', count: '22' }
-                  : { bg: 'bg-[#cd4800]/5', border: 'border-[#cd4800]/20', hover: 'hover:border-[#cd4800]', text: 'text-[#cd4800]', count: '30' };
-                return (
-                  <div 
-                    key={act.id}
-                    onClick={() => onNavigateToTab('activities')}
-                    className={`group flex items-center gap-4 p-4 ${colors.bg} rounded-2xl border ${colors.border} ${colors.hover} transition-all cursor-pointer`}
-                  >
-                    <div className={`text-center w-12 border-r ${idx === 0 ? 'border-[#00e475]' : 'border-[#cd4800]'}/30 pr-3 shrink-0`}>
-                      <p className={`text-xl font-black font-headline ${colors.text}`}>{colors.count}</p>
-                      <p className={`text-[9px] font-black ${colors.text} uppercase tracking-wider`}>มิ.ย.</p>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="text-xs font-black text-[#131b2e] truncate transition-colors">
-                        {act.title}
-                      </h4>
-                      <p className="text-[11px] font-semibold text-[#7a7489] truncate">{act.timeStr} - {act.location}</p>
-                    </div>
-                    <span className={`shrink-0 ${idx === 0 ? 'bg-[#006631]' : 'bg-[#cd4800]'} text-white text-[9px] font-black px-2 py-1 rounded shadow-sm`}>
-                      +{act.pointsReward} แต้ม
-                    </span>
-                  </div>
-                );
-              })}
+                  {upcomingActivities.slice(0, 2).map((act, idx) => {
+                    const colors = idx === 0 
+                      ? { bg: 'bg-[#00e475]/5', border: 'border-[#00e475]/20', hover: 'hover:border-[#00e475]', text: 'text-[#004b22]', count: '22' }
+                      : { bg: 'bg-[#cd4800]/5', border: 'border-[#cd4800]/20', hover: 'hover:border-[#cd4800]', text: 'text-[#cd4800]', count: '30' };
+                    return (
+                      <div 
+                        key={act.id}
+                        onClick={() => onNavigateToTab('activities')}
+                        className={`group flex items-center gap-4 p-4 ${colors.bg} rounded-2xl border ${colors.border} ${colors.hover} transition-all cursor-pointer`}
+                      >
+                        <div className={`text-center w-12 border-r ${idx === 0 ? 'border-[#00e475]' : 'border-[#cd4800]'}/30 pr-3 shrink-0`}>
+                          <p className={`text-xl font-black font-headline ${colors.text}`}>{colors.count}</p>
+                          <p className={`text-[9px] font-black ${colors.text} uppercase tracking-wider`}>มิ.ย.</p>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-xs font-black text-[#131b2e] truncate transition-colors">
+                            {act.title}
+                          </h4>
+                          <p className="text-[11px] font-semibold text-[#7a7489] truncate">{act.timeStr} - {act.location}</p>
+                        </div>
+                        <span className={`shrink-0 ${idx === 0 ? 'bg-[#006631]' : 'bg-[#cd4800]'} text-white text-[9px] font-black px-2 py-1 rounded shadow-sm`}>
+                          +{act.pointsReward} แต้ม
+                        </span>
+                      </div>
+                    );
+                  })}
+                </>
+              )}
             </div>
           </section>
 
@@ -244,35 +254,43 @@ export default function Overview({
             </div>
 
             <div className="space-y-1">
-              {topFiveMembers.map((member, index) => {
-                const clusterName = clusters.find(c => c.id === member.clusterId)?.name || `คุ้ม ${member.clusterId}`;
-                const rankLabels = [
-                  'bg-gradient-to-r from-[#0f766e] to-[#0ea5e9] text-white shadow-lg shadow-[#0f766e]/20',
-                  'bg-teal-50 text-[#0f766e] font-extrabold',
-                  'bg-teal-50 text-[#0f766e] font-extrabold',
-                  'bg-slate-100 text-[#494457]',
-                  'bg-slate-100 text-[#494457]'
-                ];
-                return (
-                  <div 
-                    key={member.id}
-                    onClick={() => onNavigateToTab('points')}
-                    className="flex items-center gap-4 p-3 rounded-2xl hover:bg-teal-50/40 transition-all cursor-pointer group"
-                  >
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black shrink-0 ${rankLabels[index]}`}>
-                      {index + 1}
+              {topFiveMembers.length === 0 ? (
+                <div className="py-8 text-center bg-slate-50 rounded-2xl border border-dashed border-[#cac3da]/30">
+                  <span className="material-symbols-outlined text-3xl text-amber-500/60 animate-pulse">military_tech</span>
+                  <p className="text-xs font-black text-[#7a7489] mt-2">ยังไม่มีข้อมูลผู้นำคะแนนประจำสัปดาห์</p>
+                  <p className="text-[10px] text-[#7a7489]/80 mt-1">คะแนนจะนับอัตโนมัติเมื่อเพิ่มสมาชิกและบันทึกการเช็คชื่อเข้าประชุม</p>
+                </div>
+              ) : (
+                topFiveMembers.map((member, index) => {
+                  const clusterName = clusters.find(c => c.id === member.clusterId)?.name || `คุ้ม ${member.clusterId}`;
+                  const rankLabels = [
+                    'bg-gradient-to-r from-[#0f766e] to-[#0ea5e9] text-white shadow-lg shadow-[#0f766e]/20',
+                    'bg-teal-50 text-[#0f766e] font-extrabold',
+                    'bg-teal-50 text-[#0f766e] font-extrabold',
+                    'bg-slate-100 text-[#494457]',
+                    'bg-slate-100 text-[#494457]'
+                  ];
+                  return (
+                    <div 
+                      key={member.id}
+                      onClick={() => onNavigateToTab('points')}
+                      className="flex items-center gap-4 p-3 rounded-2xl hover:bg-teal-50/40 transition-all cursor-pointer group"
+                    >
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black shrink-0 ${rankLabels[index]}`}>
+                        {index + 1}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-sm font-black text-[#131b2e] truncate group-hover:text-[#0f766e] transition-colors">{member.name}</h4>
+                        <p className="text-[10px] font-bold text-[#7a7489]">{clusterName.startsWith('คุ้ม') ? clusterName : `คุ้ม ${member.clusterId} - ${clusterName}`}</p>
+                      </div>
+                      <span className="text-right shrink-0">
+                        <span className="text-[#0f766e] font-black text-sm">{member.points.toLocaleString()}</span>
+                        <span className="text-[10px] text-[#7a7489] font-bold ml-1">แต้ม</span>
+                      </span>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="text-sm font-black text-[#131b2e] truncate group-hover:text-[#0f766e] transition-colors">{member.name}</h4>
-                      <p className="text-[10px] font-bold text-[#7a7489]">{clusterName.startsWith('คุ้ม') ? clusterName : `คุ้ม ${member.clusterId} - ${clusterName}`}</p>
-                    </div>
-                    <span className="text-right shrink-0">
-                      <span className="text-[#0f766e] font-black text-sm">{member.points.toLocaleString()}</span>
-                      <span className="text-[10px] text-[#7a7489] font-bold ml-1">แต้ม</span>
-                    </span>
-                  </div>
-                );
-              })}
+                  );
+                })
+              )}
             </div>
           </section>
 
