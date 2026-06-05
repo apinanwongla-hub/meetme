@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-headline: "Sora", "Kanit", "Sarabun", sans-serif;
+  --font-sans: "Hanken Grotesk", "Sarabun", "Kanit", sans-serif;
+
+  --color-primary: #0f766e;
+  --color-primary-container: #14b8a6;
+  --color-on-primary-container: #f0fdfa;
+  --color-secondary: #b45309;
+  --color-secondary-container: #d97706;
+  --color-on-secondary-container: #fffbeb;
+  --color-tertiary: #0369a1;
+  --color-tertiary-container: #0ea5e9;
+  --color-on-tertiary-container: #e0f2fe;
+  --color-background: #f8fafc;
+  --color-on-background: #0f172a;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f1f5f9;
+  --color-surface-container: #e2e8f0;
+  --color-surface-container-high: #cbd5e1;
+  --color-surface-container-highest: #94a3b8;
+  --color-outline: #64748b;
+  --color-outline-variant: #cbd5e1;
+  --color-surface: #ffffff;
+  --color-on-surface: #0f172a;
+  --color-on-surface-variant: #334155;
+  --color-inverse-surface: #1e293b;
+  --color-inverse-on-surface: #f8fafc;
+  --color-surface-dim: #cbd5e1;
+  --color-surface-bright: #f8fafc;
+  --color-primary-fixed: #e7deff;
+  --color-primary-fixed-dim: #cdbdff;
+  --color-on-primary-fixed: #1f005f;
+  --color-on-primary-fixed-variant: #4f00d1;
+  --color-secondary-fixed: #ffdbce;
+  --color-secondary-fixed-dim: #ffb59a;
+  --color-on-secondary-fixed: #370e00;
+  --color-on-secondary-fixed-variant: #802a00;
+  --color-tertiary-fixed: #62ff96;
+  --color-tertiary-fixed-dim: #00e475;
+  --color-on-tertiary-fixed: #00210b;
+  --color-on-tertiary-fixed-variant: #005226;
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+}
+
+body {
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-family: "Hanken Grotesk", "Sarabun", "Kanit", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.font-headline {
+  font-family: "Sora", "Kanit", sans-serif;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.status-badge {
+  padding: 4px 14px;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  display: inline-block;
+  text-align: center;
+}
+
+.status-normal {
+  background-color: #62ff96;
+  color: #00210b;
+  border: 1px solid #1ced7c;
+}
+
+.status-leave {
+  background-color: #ffdbce;
+  color: #370e00;
+  border: 1px solid #ffb59a;
+}
+
+.status-absent {
+  background-color: #ffdad6;
+  color: #93000a;
+  border: 1px solid #ffb4ab;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f2f3ff;
+}
+::-webkit-scrollbar-thumb {
+  background: #cac3da;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7a7489;
+}
