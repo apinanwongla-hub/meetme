@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Meeting } from '../types';
-import { getCurrentThaiYear } from '../utils/date';
 
 interface MeetingsProps {
   meetings: Meeting[];
@@ -235,7 +234,7 @@ export default function Meetings({
                   required
                   value={formData.dateStr}
                   onChange={(e) => setFormData({ ...formData, dateStr: e.target.value })}
-                  placeholder={`เช่น วันเสาร์ที่ 12 กรกฎาคม ${getCurrentThaiYear()}`}
+                  placeholder="เช่น วันเสาร์ที่ 12 กรกฎาคม 2568"
                   className="w-full px-4 py-2.5 rounded-xl border border-[#cac3da] text-sm focus:ring-2 focus:ring-[#0f766e] outline-none"
                 />
               </div>

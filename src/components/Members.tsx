@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Member, Cluster } from '../types';
-import { getThaiCurrentMonthYear } from '../utils/date';
 
 interface MembersProps {
   members: Member[];
@@ -136,7 +135,7 @@ export default function Members({
             <h2 className="text-3xl font-extrabold text-[#131b2e] tracking-tight font-headline">รายชื่อสมาชิก</h2>
             <span className="text-[11px] px-3 py-1 bg-[#006631] text-[#62ff96] font-bold rounded-full uppercase tracking-wider shadow-sm">Live</span>
           </div>
-          <p className="text-sm font-semibold text-[#7a7489]">{getThaiCurrentMonthYear()} • ทะเบียนสมาชิกชุมชนบ้านฉลีก หมู่ที่ 5 ({members.length} คน)</p>
+          <p className="text-sm font-semibold text-[#7a7489]">มิถุนายน 2568 • ทะเบียนสมาชิกชุมชนบ้านฉลีก หมู่ที่ 5 ({members.length} คน)</p>
         </div>
         <button
           onClick={handleOpenAdd}

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Cluster, Member, Meeting } from '../types';
-import { getCurrentThaiYear, getPastFourThaiMonths } from '../utils/date';
 
 interface ReportsProps {
   clusters: Cluster[];
@@ -99,7 +98,7 @@ export default function Reports({ clusters, members, meetings }: ReportsProps) {
             <div className="mb-6 flex justify-between items-center">
               <div>
                 <h3 className="text-lg font-black font-headline text-[#131b2e]">อัตราการร่วมประชุมแยกรายคุ้ม (%)</h3>
-                <p className="text-xs text-[#7a7489] font-bold">{`กราฟวัดสัดส่วนการเข้าลงชื่อตามวารสารปี ${getCurrentThaiYear()}`}</p>
+                <p className="text-xs text-[#7a7489] font-bold">กราฟวัดสัดส่วนการเข้าลงชื่อตามวารสารปี 2568</p>
               </div>
               <span className="text-xs font-black bg-teal-50 border px-3 py-1 text-[#0f766e] rounded-lg">
                 เป้าชุมชน: 70%
@@ -198,21 +197,26 @@ export default function Reports({ clusters, members, meetings }: ReportsProps) {
       <section className="bg-white border border-[#cac3da]/50 rounded-[2rem] overflow-hidden shadow-lg p-6">
         <h3 className="text-base font-black font-headline text-[#131b2e] mb-4">แนวโน้มการมีส่วนร่วมรายปี</h3>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {getPastFourThaiMonths().map((m, idx) => {
-            const staticMetrics = [
-              { percent: '56%', trend: 'ต่ำกว่าค่าเฉลี่ย', trendClass: 'text-[#ba1a1a]', bg: 'bg-slate-50 border border-slate-100', textCol: 'text-[#7a7489]' },
-              { percent: '66%', trend: 'สอดคล้องตามมาตรฐาน', trendClass: 'text-[#006631]', bg: 'bg-slate-50 border border-slate-100', textCol: 'text-[#7a7489]' },
-              { percent: '61%', trend: 'ทรงตัว', trendClass: 'text-amber-600', bg: 'bg-slate-50 border border-slate-100', textCol: 'text-[#7a7489]' },
-              { percent: `${avgAttendance}%`, trend: 'สูงขึ้น 3% • ดี', trendClass: 'text-[#006631]', bg: 'bg-teal-50 border border-teal-200/50', textCol: 'text-[#0f766e]' }
-            ][idx];
-            return (
-              <div key={m.name} className={`p-4 rounded-2xl text-center ${staticMetrics.bg}`}>
-                <span className={`text-[10px] font-black uppercase ${staticMetrics.textCol}`}>{m.name} {m.isCurrent && '(ล่าสุด)'}</span>
-                <p className={`text-xl font-black ${m.isCurrent ? 'text-[#0f766e]' : 'text-[#131b2e]'}`}>{staticMetrics.percent}</p>
-                <span className={`text-[9px] font-bold ${staticMetrics.trendClass}`}>{staticMetrics.trend}</span>
-              </div>
-            );
-          })}
+          <div className="border border-slate-100 p-4 rounded-2xl bg-slate-50 text-center">
+            <span className="text-[10px] font-black text-[#7a7489] uppercase">มีนาคม 2568</span>
+            <p className="text-xl font-black text-[#131b2e]">56%</p>
+            <span className="text-[9px] font-bold text-[#ba1a1a]">ต่ำกว่าค่าเฉลี่ย</span>
+          </div>
+          <div className="border border-slate-100 p-4 rounded-2xl bg-slate-50 text-center">
+            <span className="text-[10px] font-black text-[#7a7489] uppercase">เมษายน 2568</span>
+            <p className="text-xl font-black text-[#131b2e]">66%</p>
+            <span className="text-[9px] font-bold text-[#006631]">สอดคล้องตามมาตรฐาน</span>
+          </div>
+          <div className="border border-slate-100 p-4 rounded-2xl bg-slate-50 text-center">
+            <span className="text-[10px] font-black text-[#7a7489] uppercase">พฤษภาคม 2568</span>
+            <p className="text-xl font-black text-[#131b2e]">61%</p>
+            <span className="text-[9px] font-bold text-amber-600">ทรงตัว</span>
+          </div>
+          <div className="border border-slate-100 p-4 rounded-2xl bg-teal-50 text-center">
+            <span className="text-[10px] font-black text-[#0f766e] uppercase">มิถุนายน 2568 (ล่าสุด)</span>
+            <p className="text-xl font-black text-[#0f766e]">64%</p>
+            <span className="text-[9px] font-bold text-[#006631]">สูงขึ้น 3% • ดี</span>
+          </div>
         </div>
       </section>
     </div>
